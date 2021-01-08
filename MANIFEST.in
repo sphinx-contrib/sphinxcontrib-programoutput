@@ -2,8 +2,10 @@ include README.rst
 include LICENSE
 include CHANGES.*
 include tox.ini
-include .travis.yml
 include .coveragerc
+include .pre-commit-config.yaml
 include .pylintrc
+include .travis.yml
+include .yamllint
 recursive-include src *.py
 recursive-include doc *.rst *.py

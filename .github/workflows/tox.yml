@@ -24,6 +24,8 @@ jobs:
         include:
           - name: lint
             tox_env: lint
+          - name: packaging
+            tox_env: packaging
           - name: doc
             tox_env: doc
           - name: py36
