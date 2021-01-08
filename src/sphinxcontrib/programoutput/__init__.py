@@ -288,7 +288,10 @@ def run_programs(app, doctree):
         else:
             if returncode != node['returncode']:
                 logger.warning(
-                    'Unexpected return code %s from command %s', returncode, command
+                    'Unexpected return code %s from command %s:\n%s',
+                    returncode,
+                    command,
+                    output,
                 )
 
             # replace lines with ..., if ellipsis is specified
