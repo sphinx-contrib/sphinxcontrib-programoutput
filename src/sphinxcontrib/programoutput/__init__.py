@@ -37,7 +37,6 @@ from __future__ import print_function, division, absolute_import
 
 import sys
 import os
-import pkg_resources
 import shlex
 from subprocess import Popen, PIPE, STDOUT
 from collections import defaultdict, namedtuple
@@ -46,6 +45,7 @@ from docutils import nodes
 from docutils.parsers import rst
 from docutils.parsers.rst.directives import flag, unchanged, nonnegative_int
 from docutils.statemachine import StringList
+import pkg_resources
 
 from sphinx.util import logging as sphinx_logging
 

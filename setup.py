@@ -26,10 +26,6 @@
 import setuptools
 
 
-"""
-    test_suite='sphinxcontrib.programoutput.tests',
-"""
-
 setuptools.setup(
     use_scm_version={"local_scheme": "no-local-version"},
     setup_requires=["setuptools_scm[toml]>=3.5.0"],

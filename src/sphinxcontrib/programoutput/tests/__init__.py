@@ -1,16 +1,14 @@
+from functools import update_wrapper
 import os
 import os.path
 import shutil
 import tempfile
 import unittest  # noqa
 
-
 from docutils import nodes
 from docutils.parsers.rst import directives
 from docutils.parsers.rst import roles
 from sphinx.application import Sphinx
-
-from functools import update_wrapper
 
 # pylint:disable=no-self-use,protected-access,too-few-public-methods
 # useless-object-inheritance is version specific
