@@ -2,10 +2,8 @@
  Changes
 =========
 
-0.17 (unreleased)
-=================
-
-- Nothing changed yet.
+Starting withe 2021, release notes are accessed from:
+https://github.com/sphinx-contrib/sphinxcontrib-programoutput/releases
 
 
 0.16 (2020-03-23)

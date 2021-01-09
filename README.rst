@@ -1,15 +1,9 @@
-=============================
- sphinxcontrib-programoutput
-=============================
-
-.. image:: https://secure.travis-ci.org/NextThought/sphinxcontrib-programoutput.png
-   :target: http://travis-ci.org/NextThought/sphinxcontrib-programoutput
-
-.. image:: https://coveralls.io/repos/github/NextThought/sphinxcontrib-programoutput/badge.svg
-   :target: https://coveralls.io/github/NextThought/sphinxcontrib-programoutput
+============================
+sphinxcontrib-programoutput2
+============================
 
 
-https://sphinxcontrib-programoutput.readthedocs.org
+https://sphinxcontrib-programoutput2.readthedocs.org
 
 A Sphinx_ extension to literally insert the output of arbitrary commands into
 documents, helping you to keep your command examples up to date.
@@ -20,10 +14,9 @@ Installation
 
 Install this extension from PyPI_::
 
-   pip install sphinxcontrib-programoutput
+   pip install sphinxcontrib-programoutput2
 
-The extension requires Sphinx 1.7.0 and Python 2.7 or Python 3 (Python
-3.5+ is tested) at least.
+The extension requires Sphinx 3.0.0 and Python 3.6 or newer.
 
 Usage
 =====
@@ -39,7 +32,7 @@ insert the output of programs.  The former just inserts the output::
 
 Output::
 
-   Python 2.7.1
+   Python 3.9.0
 
 The latter directive mimics a shell session, and is intended to show examples::
 
@@ -48,7 +41,7 @@ The latter directive mimics a shell session, and is intended to show examples::
 Output::
 
    $ python -V
-   Python 2.7.1
+   Python 3.9.0
 
 
 Please refer to the documentation_ for comprehensive information about usage and
@@ -63,5 +56,5 @@ development process.
 
 
 .. _Sphinx: http://www.sphinx-doc.org/en/stable/
-.. _PyPI: http://pypi.python.org/pypi/sphinxcontrib-programoutput
-.. _documentation: http://sphinxcontrib-programoutput.readthedocs.org
+.. _PyPI: http://pypi.python.org/pypi/sphinxcontrib-programoutput2
+.. _documentation: http://sphinxcontrib-programoutput2.readthedocs.org
