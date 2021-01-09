@@ -44,7 +44,7 @@ class TestCommand(unittest.TestCase):
         cmd = Command(['echo', 'spam'])
         self.assertEqual(cmd.command, ('echo', 'spam'))
 
-    def test_new_with_list_hashable(self):
+    def test_new_with_list_hashable(self):  # pylint: disable=no-self-use
         # Test that Command objects are hashable even when passed a non-hashable
         # list.  Important for caching!
         hash(Command(['echo', 'spam']))

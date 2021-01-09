@@ -40,7 +40,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 project = u'sphinxcontrib-programoutput'
-copyright = u'2010, 2011, Sebastian Wiesner'
+copyright = u'2010, 2011, Sebastian Wiesner'  # pylint: disable=redefined-builtin
 version = '.'.join(programoutput.__version__.split('.')[:2])
 release = programoutput.__version__
 
