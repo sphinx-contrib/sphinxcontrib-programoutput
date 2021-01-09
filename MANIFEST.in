@@ -7,5 +7,6 @@ include .pre-commit-config.yaml
 include .pylintrc
 include .travis.yml
 include .yamllint
-recursive-include src *.py
+include tools/ansitest
+recursive-include src *.py *.css
 recursive-include doc *.rst *.py

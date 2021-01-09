@@ -26,7 +26,7 @@
 
 import sphinxcontrib.programoutput as programoutput
 
-needs_sphinx = '1.0'
+needs_sphinx = '3.0'
 
 extensions = [
     'sphinx.ext.autodoc',
@@ -51,7 +51,6 @@ html_static_path = []
 
 intersphinx_mapping = {
     'python': ('https://docs.python.org', None),
-    'ansi': ('http://packages.python.org/sphinxcontrib-ansi', None),
 }
 
 extlinks = {
