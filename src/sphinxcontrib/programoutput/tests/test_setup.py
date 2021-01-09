@@ -26,7 +26,7 @@
 from __future__ import print_function, division, absolute_import
 
 import unittest
-from . import AppMixin
+from sphinxcontrib.programoutput.tests import AppMixin
 
 from sphinxcontrib.programoutput import ProgramOutputCache
 

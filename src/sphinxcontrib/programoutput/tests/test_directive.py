@@ -35,7 +35,7 @@ from docutils.nodes import caption, container, literal_block, system_message
 
 from sphinxcontrib.programoutput import Command
 
-from . import AppMixin
+from sphinxcontrib.programoutput.tests import AppMixin
 
 
 def with_content(content, **kwargs):

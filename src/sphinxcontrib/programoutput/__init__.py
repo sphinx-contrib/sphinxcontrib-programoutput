@@ -37,6 +37,7 @@ from __future__ import print_function, division, absolute_import
 
 import sys
 import os
+import pkg_resources
 import shlex
 from subprocess import Popen, PIPE, STDOUT
 from collections import defaultdict, namedtuple
@@ -48,7 +49,11 @@ from docutils.statemachine import StringList
 
 from sphinx.util import logging as sphinx_logging
 
-__version__ = '0.17.dev0'
+try:
+    __version__ = pkg_resources.get_distribution("sphinxcontrib.programoutput").version
+except (pkg_resources.DistributionNotFound, AttributeError):
+    __version__ = "unknown"
+
 
 logger = sphinx_logging.getLogger('contrib.programoutput')
 

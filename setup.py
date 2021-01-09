@@ -23,77 +23,14 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-import os
-import re
-from setuptools import setup, find_packages
+import setuptools
 
 
-def read_desc():
-    with open('README.rst') as stream:
-        readme = stream.read()
-    with open('CHANGES.rst') as stream:
-        changes = stream.read()
-
-    return readme + '\n\n' + changes
-
-
-def read_version_number():
-    VERSION_PATTERN = re.compile(r"__version__ = '([^']+)'")
-    with open(
-        os.path.join('src', 'sphinxcontrib', 'programoutput', '__init__.py')
-    ) as stream:
-        for line in stream:
-            match = VERSION_PATTERN.search(line)
-            if match:
-                return match.group(1)
-
-        raise ValueError('Could not extract version number')
-
-
-tests_require = []
-
-setup(
-    name='sphinxcontrib-programoutput',
-    version=read_version_number(),
-    url='https://sphinxcontrib-programoutput.readthedocs.org/',
-    license='BSD',
-    author='Sebastian Wiesner',
-    author_email='lunaryorn@gmail.com',
-    maintainer="Jason Madden",
-    maintainer_email='jason@nextthought.com',
-    description='Sphinx extension to include program output',
-    long_description=read_desc(),
-    keywords="sphinx cli command output program example",
-    zip_safe=False,
-    classifiers=[
-        'Development Status :: 5 - Production/Stable',
-        'Intended Audience :: Developers',
-        'License :: OSI Approved :: BSD License',
-        'Operating System :: OS Independent',
-        'Programming Language :: Python',
-        'Programming Language :: Python :: 3',
-        "Programming Language :: Python :: 2.7",
-        "Programming Language :: Python :: 3.6",
-        "Programming Language :: Python :: 3.7",
-        "Programming Language :: Python :: 3.8",
-        "Programming Language :: Python :: Implementation :: CPython",
-        'Topic :: Documentation',
-        'Topic :: Utilities',
-        'Framework :: Sphinx',
-        'Framework :: Sphinx :: Extension',
-    ],
-    platforms='any',
-    packages=find_packages('src'),
-    package_dir={'': 'src'},
-    namespace_packages=['sphinxcontrib'],
-    include_package_data=True,
-    install_requires=[
-        'Sphinx>=1.7.0',
-    ],
-    tests_require=tests_require,
-    extras_require={
-        'test': tests_require,
-    },
-    python_requires=">=3.6",
+"""
     test_suite='sphinxcontrib.programoutput.tests',
+"""
+
+setuptools.setup(
+    use_scm_version={"local_scheme": "no-local-version"},
+    setup_requires=["setuptools_scm[toml]>=3.5.0"],
 )
