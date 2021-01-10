@@ -49,6 +49,14 @@ import pkg_resources
 
 from sphinx.util import logging as sphinx_logging
 
+from sphinxcontrib.programoutput.ansi import (
+    ANSIBlockDirective,
+    ANSIColorParser,
+    add_stylesheet,
+    copy_stylesheet,
+    ansi_literal_block,
+)
+
 try:
     __version__ = pkg_resources.get_distribution("sphinxcontrib.programoutput").version
 except (pkg_resources.DistributionNotFound, AttributeError):
@@ -269,11 +277,6 @@ def run_programs(app, doctree):
     The program output is retrieved from the cache in
     ``app.env.programoutput_cache``.
     """
-    # The node_class used to be switchable to `sphinxcontrib.ansi.ansi_literal_block`
-    # if `app.config.programoutput_use_ansi` was set. But sphinxcontrib.ansi
-    # is no longer available on PyPI, so we can't test that. And if we can't test it,
-    # we can't support it.
-    node_class = nodes.literal_block
 
     cache = app.env.programoutput_cache
 
@@ -322,7 +325,12 @@ def run_programs(app, doctree):
                     command=node['command'], output=output, returncode=returncode
                 )
 
-            new_node = node_class(output, output)
+            if '\u001B[' in output:
+                # ANSI escapes detected
+                new_node = ansi_literal_block(output, output)
+            else:
+                new_node = nodes.literal_block(output, output)
+
             new_node['language'] = 'text'
             node.replace_self(new_node)
 
@@ -345,6 +353,13 @@ def setup(app):
     )
     app.add_directive('program-output', ProgramOutputDirective)
     app.add_directive('command-output', ProgramOutputDirective)
+
+    app.add_config_value('html_ansi_stylesheet', "black-on-white.css", 'env')
+    app.add_directive('ansi-block', ANSIBlockDirective)
+    app.connect('builder-inited', add_stylesheet)
+    app.connect('build-finished', copy_stylesheet)
+    app.connect('doctree-resolved', ANSIColorParser())
+
     app.connect('builder-inited', init_cache)
     app.connect('doctree-read', run_programs)
     metadata = {'parallel_read_safe': True}

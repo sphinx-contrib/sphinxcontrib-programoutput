@@ -54,4 +54,6 @@ repos:
       - id: pylint
         additional_dependencies:
           - docutils
+          - mock
+          - pytest
           - sphinx

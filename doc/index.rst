@@ -18,7 +18,7 @@ Installation
 
 Use ``pip`` to install this extension from PyPI_::
 
-   pip install sphinxcontrib-programoutput
+   pip install sphinxcontrib-programoutput2
 
 The extension requires Sphinx 1.3 and Python 2.7 or Python 3 at least.
 
@@ -147,6 +147,36 @@ Other shell features like process expansion consequently work, too::
 
 Remember to use ``shell`` carefully to avoid unintented interpretation of shell
 syntax and swallowing of fatal errors!
+
+
+ANSI Support
+------------
+
+If you want to inject an ANSI block you use the `ansi-block` directive.
+
+.. directive:: ansi-block
+
+   This directive interprets its content as literal block containing ANSI
+   control sequences for coloured output for HTML output.  If the document
+   is build with any other builder than ``html``, color sequences are
+   stripped from output.
+
+   If the option ``string_escape`` is specified, the content of the
+   directive is decoded using the ``string_escape`` codec.  Thus you can
+   include Python escape sequences, and therefore use ``\x1b`` instead of
+   the real escape character.
+
+.. ansi-block::
+   :string_escape:
+
+   \x1b[31mRed dwarf!\x1b[0m or normal.
+
+If ANSI escapes are detected in output captured by `command-output` or
+`program-output` directives, they are automatically rendered as HTML.
+
+.. command-output:: ./tools/ansitest
+   :shell:
+   :cwd: ..
 
 
 Error handling

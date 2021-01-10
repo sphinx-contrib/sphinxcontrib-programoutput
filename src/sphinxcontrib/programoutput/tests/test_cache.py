@@ -31,8 +31,7 @@ import sys
 import unittest
 
 from sphinxcontrib.programoutput import ProgramOutputCache, Command
-
-from . import AppMixin
+from sphinxcontrib.programoutput.tests import AppMixin
 
 
 class TestCache(AppMixin, unittest.TestCase):
