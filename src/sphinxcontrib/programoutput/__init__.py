@@ -58,7 +58,7 @@ from sphinxcontrib.programoutput.ansi import (
 )
 
 try:
-    __version__ = pkg_resources.get_distribution("sphinxcontrib.programoutput").version
+    __version__ = pkg_resources.get_distribution("sphinxcontrib.programoutput2").version
 except (pkg_resources.DistributionNotFound, AttributeError):
     __version__ = "unknown"
 
