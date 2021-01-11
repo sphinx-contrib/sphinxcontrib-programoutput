@@ -39,6 +39,8 @@ import os
 from os import path
 import re
 
+from typing import Dict, List
+
 from docutils import nodes
 from docutils.parsers import rst
 from docutils.parsers.rst.directives import flag
@@ -68,26 +70,42 @@ class ansi_literal_block(nodes.literal_block):
 COLOR_PATTERN = re.compile('\x1b\\[([^m]+)m')
 
 #: map ANSI color codes to class names
-CODE_CLASS_MAP = {
-    1: 'bold',
-    4: 'underscore',
-    30: 'black',
-    31: 'red',
-    32: 'green',
-    33: 'yellow',
-    34: 'blue',
-    35: 'magenta',
-    36: 'cyan',
-    37: 'white',
-    40: 'bg_black',
-    41: 'bg_red',
-    42: 'bg_green',
-    43: 'bg_yellow',
-    44: 'bg_blue',
-    45: 'bg_magenta',
-    46: 'bg_cyan',
-    47: 'bg_white',
-    2: 'dim',
+CODE_CLASS_MAP: Dict[int, List[str]] = {
+    1: ['bold'],
+    2: ['dim'],
+    4: ['underscore'],
+    30: ['black'],
+    31: ['red'],
+    32: ['green'],
+    33: ['yellow'],
+    34: ['blue'],
+    35: ['magenta'],
+    36: ['cyan'],
+    37: ['white'],
+    40: ['bg_black'],
+    41: ['bg_red'],
+    42: ['bg_green'],
+    43: ['bg_yellow'],
+    44: ['bg_blue'],
+    45: ['bg_magenta'],
+    46: ['bg_cyan'],
+    47: ['bg_white'],
+    90: ['black', 'bright'],
+    91: ['red', 'bright'],
+    92: ['green', 'bright'],
+    93: ['yellow', 'bright'],
+    94: ['blue', 'bright'],
+    95: ['magenta', 'bright'],
+    102: ['bg_green', 'bright'],
+    96: ['cyan', 'bright'],
+    97: ['white', 'bright'],
+    100: ['bg_black', 'bright'],
+    101: ['bg_red', 'bright'],
+    103: ['bg_yellow', 'bright'],
+    104: ['bg_blue', 'bright'],
+    105: ['bg_magenta', 'bright'],
+    106: ['bg_cyan', 'bright'],
+    107: ['bg_white', 'bright'],
 }
 
 
@@ -165,13 +183,11 @@ class ANSIColorParser:
                 code_node = nodes.inline()
                 self.pending_nodes.append(code_node)
                 # and set the classes for its colors
-                # remove bright bit as we do not support it yet
                 for code in codes:
-                    # code = code & ~(1 << 6)
-                    # import sys
-                    # print(555, code, file=sys.stderr)
+                    # code_node['classes'].append('ansi-%s' % code)
                     if code in CODE_CLASS_MAP:
-                        code_node['classes'].append('ansi-%s' % CODE_CLASS_MAP[code])
+                        for entry in CODE_CLASS_MAP[code]:
+                            code_node['classes'].append(f'ansi-{entry}')
                     else:
                         console.error("Unknown ANSI code %s found, ignored.", code)
 
