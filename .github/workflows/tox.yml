@@ -24,44 +24,44 @@ jobs:
         include:
           - name: lint
             tox_env: lint
+            python-version: 3.8
           - name: packaging
             tox_env: packaging
+            python-version: 3.8
           - name: doc
             tox_env: doc
+            python-version: 3.8
           - name: py36
-            tox_env: py36
+            tox_env: py36,coverage
+            python-version: 3.6
           - name: py37
-            tox_env: py37
+            tox_env: py37,coverage
+            python-version: 3.7
           - name: py38
-            tox_env: py38
+            tox_env: py38,coverage
+            python-version: 3.8
           - name: py39
-            tox_env: py39
+            tox_env: py39,coverage
+            python-version: 3.9
           - name: py38-macos
             tox_env: py38
             os: macOS-latest
             python-version: 3.8
 
     steps:
+
+      # https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-commands-for-github-actions#adding-a-system-path
+      - run: |
+          mkdir -p $HOME/.local/bin
+          echo "PATH=$HOME/.local/bin:$PATH" >> $GITHUB_ENV
+
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0  # needed by setuptools-scm
-      - name: Find python version
-        id: py_ver
-        shell: python
-        if: ${{ contains(matrix.tox_env, 'py') }}
-        run: |
-          v = '${{ matrix.tox_env }}'.split('-')[0].lstrip('py')
-          print('::set-output name=version::{0}.{1}'.format(v[0],v[1:]))
-      # Even our lint and other envs need access to tox
-      - name: Install a default Python
-        uses: actions/setup-python@v2
-        if: ${{ ! contains(matrix.tox_env, 'py') }}
-      # Be sure to install the version of python needed by a specific test, if necessary
       - name: Set up Python version
         uses: actions/setup-python@v2
-        if: ${{ contains(matrix.tox_env, 'py') }}
         with:
-          python-version: ${{ steps.py_ver.outputs.version }}
+          python-version: ${{ matrix.python-version }}
       - name: Install dependencies
         run: |
           python -m pip install -U pip
