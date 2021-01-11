@@ -205,6 +205,7 @@ class Command(_Command):
             stdout=PIPE,
             stderr=PIPE if self.hide_standard_error else STDOUT,
             cwd=self.working_directory,
+            env=os.environ,
         )
 
     def get_output(self):
