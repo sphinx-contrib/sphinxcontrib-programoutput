@@ -91,7 +91,7 @@ jobs:
       )
     needs:
       - build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     env:
       PY_COLORS: 1
@@ -116,9 +116,14 @@ jobs:
           password: ${{ secrets.testpypi_password }}
           repository_url: https://test.pypi.org/legacy/
       - name: Publish to pypi.org
+        # succeeded||failed trick is used to enforce run even if previous
+        # task failed. This avoid cases where we fail to release because an
+        # upload fails on test instance (can happen on reruns).
         if: >-
+          ${{ (success() || failure()) &&
           github.event_name == 'release' &&
           github.event.action == 'published'
+          }}
         uses: pypa/gh-action-pypi-publish@master
         with:
           password: ${{ secrets.pypi_password }}
