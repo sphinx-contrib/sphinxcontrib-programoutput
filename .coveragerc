@@ -1,5 +1,5 @@
 [run]
-source = src
+include = */sphinxcontrib/programoutput/*
 
 [report]
 exclude_lines =
